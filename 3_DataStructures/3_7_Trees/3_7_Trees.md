@@ -23,7 +23,7 @@
 
 ## 트리의 특징
 
-- 하나의 노드에서 다른 노드로 이동하는 경로는 유일
+- 하나의 노드에서 다른 노드로 이동하는 경로(path)는 유일
 - Acyclic하다. (Cycle이 존재하지 않는다)
 - 모든 노드는 서로 연결되어 있다. (외딴 섬이 존재하지 않는다.) -> 'connected'
 - ★ 하나의 Edge를 끊으면 두개의 Sub-Tree로 분리된다.
@@ -125,8 +125,8 @@
       1. 후위 순회 (Postorder)
     - 탐색 알고리즘: 탐색하여 Tree에 해당 `value`의 존재 여부를 판단한다.
       1. 넓이 우선 탐색 (Breadth-First Search; BFS)
-    1. 깊이 우선 탐색 (Depth-First Search; DFS)
-  
+      2. 깊이 우선 탐색 (Depth-First Search; DFS)
+
 - **참조 코드**
   - [기반 소스 코드](src/array/before.js)
   - [솔루션 코드](src/array/after.js)
@@ -135,7 +135,7 @@
 
 - JavaScript의 `class`를 이용해 직접 구현하기
 - **구현 조건**
-  - `value`, `left`, `right`를 가진 `node class`를 이용하여 구현한다.
+  - **`value`, `left`, `right`를 가진 `node class`를 이용하여 구현한다.** -> 배열 기반과의 차이점
   - 데이터는 생성자에서 배열로 입력받는다.
   - 다음과 같은 트리의 연산을 구현해야 한다. (*자료의 입력과 삭제는 구현하지 않는다.*)
     - 순회 알고리즘: 순회하는 순서대로 Element를 출력한다.
