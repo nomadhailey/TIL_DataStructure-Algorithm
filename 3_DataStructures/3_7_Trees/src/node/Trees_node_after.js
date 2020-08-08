@@ -11,7 +11,12 @@ class BinaryTree {
   constructor(array) {
     // array로 받은 것을 node 형태로 변경
     const nodeArray = array.map((el) => new Node(el));
-    // nodeArray [Node { value: 0, left: null, right: null },,,,Node { value: 4, left: null, right: null }]
+    // nodeArray
+    //[Node { value: 0, left: null, right: null },
+    // Node { value: 1, left: null, right: null },
+    // Node { value: 2, left: null, right: null },
+    // Node { value: 3, left: null, right: null },
+    // Node { value: 4, left: null, right: null }]
     for (let i = 0; i < nodeArray.length; i++) {
       //nodeArray.length=5
       const leftInd = i * 2 + 1; // 1,3,5,7,9
@@ -29,6 +34,19 @@ class BinaryTree {
         // nodeArray[1].right = nodeArray[4]
       }
     }
+    // nodeArray_위의 for문의 결과값
+    //[Node { value: 0, left: nodeArray[1], right: nodeArray[2] },
+    // Node { value: 1, left: nodeArray[3], right: nodeArray[4] },
+    // Node { value: 2, left: null, right: null },
+    // Node { value: 3, left: null, right: null },
+    // Node { value: 4, left: null, right: null }]
+
+    // 위의 결과값을 세부적으로 파고들면 아래와 같음
+    // [Node { value: 0, left: Node { value: 1, left: Node { value: 3, left: null, right: null }, right: Node { value: 4, left: null, right: null }}, right: Node { value: 2, left: null, right: null }},
+    // Node { value: 1, left: Node { value: 3, left: null, right: null }, right: Node { value: 4, left: null, right: null } },
+    // Node { value: 2, left: null, right: null },
+    // Node { value: 3, left: null, right: null },
+    // Node { value: 4, left: null, right: null }]
 
     this.root = nodeArray[0];
     console.log("nodeArray", nodeArray);
@@ -38,24 +56,6 @@ class BinaryTree {
     let s = "";
 
     function recursive(node) {
-      //   console.log("node", node);
-      //   Node {
-      //     value: 0,
-      //     left: Node {
-      //       value: 1,
-      //       left: Node { value: 3, left: null, right: null },
-      //       right: Node { value: 4, left: null, right: null }
-      //     },
-      //     right: Node { value: 2, left: null, right: null }
-      //   }
-      //   Node {
-      //     value: 1,
-      //     left: Node { value: 3, left: null, right: null },
-      //     right: Node { value: 4, left: null, right: null }
-      //   }
-      //   Node { value: 3, left: null, right: null }
-      //   Node { value: 4, left: null, right: null }
-      //   Node { value: 2, left: null, right: null }
       s += `${node.value} `;
       console.log("node.value", node.value); // 0 -> 1 -> 3 -> 4 -> 2
       if (node.left !== null) {
@@ -65,18 +65,8 @@ class BinaryTree {
         recursive(node.right);
       }
     }
-    // console.log(this.root);
-    // Node {
-    //     value: 0,
-    //     left: Node {
-    //       value: 1,
-    //       left: Node { value: 3, left: null, right: null },
-    //       right: Node { value: 4, left: null, right: null }
-    //     },
-    //     right: Node { value: 2, left: null, right: null }
-    //   }
     recursive(this.root);
-    console.log(s);
+    console.log(s); // 0 1 3 4 2
   }
 
   inorder() {
@@ -112,12 +102,22 @@ class BinaryTree {
   }
   // bfs는 queue로 접근하면 좋음
   bfs(value) {
-    const queue = new Array(); // js의 array는 list와 비슷한 역할을 한다
+    const queue = new Array(); // [] //js의 array는 list와 비슷한 역할을 한다
 
     queue.push(this.root); // 리어쪽에 값을 넣음. root'노드'를 인자로 넣어줌(인덱스가 0인 루트 노드)
+    console.log("queue", queue);
+    // queue [
+    //   Node {
+    //     value: 0,
+    //     left: Node { value: 1, left: [Node], right: [Node] },
+    //     right: Node { value: 2, left: null, right: null }
+    //   }
+    // ]
     while (queue.length > 0) {
+      // queue.length = 1
       // 큐가 빌 때까지 하는 것
       const node = queue.shift(); // front에 값을 빼줌. 그럼 처음에 0번 인덱스가 빠짐
+      console.log("node", node);
 
       if (node.value === value) {
         return node;
@@ -168,8 +168,8 @@ tree.preorder(); //  0 1 3 4 2
 tree.inorder();
 tree.postorder();
 
-console.log(tree.dfs(15));
-console.log(tree.dfs(11));
+console.log(tree.bfs(2));
+// console.log(tree.bfs(17));
 
-console.log(tree.bfs(6));
-console.log(tree.bfs(17));
+// console.log(tree.dfs(15));
+// console.log(tree.dfs(11));
