@@ -87,7 +87,9 @@ class DoublyLinkedList {
 
   remove(index) {
     if (index === 0) {
-      this.head = new Node(value, null, this.head);
+      this.head = this.head.next;
+      this.head.prev = null;
+      return true;
     }
     let curr = this.head;
     for (let i = 0; i < index; i++) {
